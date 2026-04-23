@@ -13,11 +13,18 @@ function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <NavigationBar />
-      
+
       {/* Add margin top so content is not hidden behind the fixed navbar */}
-      <main className="flex-grow-1" style={{ marginTop: '70px' }}>
+      <main
+        className="flex-grow-1"
+        style={{ marginTop: '70px', position: 'relative' }}
+      >
+        {/* Glow Effects */}
+        <div className="glow" style={{ top: '10%', left: '10%' }} />
+        <div className="glow" style={{ bottom: '10%', right: '10%' }} />
+
         <Container className="py-4">
-          
+
           <section id="home">
             <Hero />
           </section>

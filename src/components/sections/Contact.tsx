@@ -19,13 +19,13 @@ const Contact = () => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim() || !emailRegex.test(formData.email)) {
-      newErrors.email = 'Valid email is required';
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Valid email required';
       isValid = false;
     }
 
     if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = 'Minimum 10 characters required';
       isValid = false;
     }
 
@@ -39,151 +39,203 @@ const Contact = () => {
 
     if (validate()) {
       setIsSubmitting(true);
-      // Simulate API call
+
       setTimeout(() => {
         setIsSubmitting(false);
         setSuccess(true);
         setFormData({ name: '', email: '', message: '' });
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => setSuccess(false), 5000);
-      }, 1500);
+
+        setTimeout(() => setSuccess(false), 4000);
+      }, 1200);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user types
+
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   return (
-    <>
-      <h2 className="text-center mb-5 fw-bold" style={{ color: 'var(--text-color)' }}>Get In Touch</h2>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <Row className="justify-content-center mx-auto" style={{ maxWidth: '1000px' }}>
-          <Col lg={4} className="mb-4 mb-lg-0">
-            <div className="h-100 p-4 rounded shadow-sm d-flex flex-column" style={{ backgroundColor: 'var(--card-bg, var(--bg-color))' }}>
-              <h4 className="fw-bold mb-4" style={{ color: 'var(--text-color)' }}>Let's Connect</h4>
-              <p className="mb-4" style={{ color: 'var(--text-color)', opacity: 0.9 }}>
-                Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
-              </p>
-              
-              <div className="d-flex flex-column gap-3 mt-auto">
-                <a href="mailto:hello@example.com" className="text-decoration-none d-flex align-items-center gap-3" style={{ color: 'var(--text-color)' }}>
-                  <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(13, 110, 253, 0.1)' }}>
-                    <BsEnvelope size={20} style={{ color: 'var(--primary-color)' }} />
-                  </div>
-                  <span>hello@example.com</span>
-                </a>
-                
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="text-decoration-none d-flex align-items-center gap-3" style={{ color: 'var(--text-color)' }}>
-                  <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(13, 110, 253, 0.1)' }}>
-                    <BsGithub size={20} style={{ color: 'var(--primary-color)' }} />
-                  </div>
-                  <span>GitHub Profile</span>
-                </a>
+    <div style={{ paddingTop: '80px', paddingBottom: '80px' }}>
 
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-decoration-none d-flex align-items-center gap-3" style={{ color: 'var(--text-color)' }}>
-                  <div className="d-flex align-items-center justify-content-center rounded-circle" style={{ width: '40px', height: '40px', backgroundColor: 'rgba(13, 110, 253, 0.1)' }}>
-                    <BsLinkedin size={20} style={{ color: 'var(--primary-color)' }} />
+      {/* HEADER */}
+      <div className="text-center mb-5">
+        <p style={{ color: 'var(--accent-color)', letterSpacing: '2px' }}>
+          CONTACT
+        </p>
+
+        <h2 className="fw-bold mb-3">
+          Let’s Work Together 🚀
+        </h2>
+
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+          Have a project idea or need backend expertise? Let’s build something scalable and powerful.
+        </p>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <Row className="g-4 justify-content-center">
+
+          {/* LEFT SIDE */}
+          <Col lg={4}>
+            <div
+              style={{
+                borderRadius: '20px',
+                background: 'var(--card-gradient)',
+                border: '1px solid var(--card-border)',
+                boxShadow: 'var(--card-shadow)',
+                padding: '25px',
+                height: '100%'
+              }}
+            >
+              <h5 className="fw-bold mb-3">Connect With Me</h5>
+
+              <p style={{ color: 'var(--text-secondary)' }}>
+                Open for freelance, collaboration, or full-time opportunities.
+              </p>
+
+              <div className="d-flex flex-column gap-3 mt-4">
+
+                {[
+                  { icon: <BsEnvelope />, text: 'hello@example.com' },
+                  { icon: <BsGithub />, text: 'GitHub Profile' },
+                  { icon: <BsLinkedin />, text: 'LinkedIn Profile' }
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="d-flex align-items-center gap-3"
+                    style={{
+                      padding: '12px',
+                      borderRadius: '12px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '10px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))',
+                        color: '#fff'
+                      }}
+                    >
+                      {item.icon}
+                    </div>
+
+                    <span style={{ color: 'var(--text-color)' }}>
+                      {item.text}
+                    </span>
                   </div>
-                  <span>LinkedIn Profile</span>
-                </a>
+                ))}
+
               </div>
             </div>
           </Col>
-          
+
+          {/* RIGHT FORM */}
           <Col lg={8}>
-            <div className="p-4 rounded shadow-sm" style={{ backgroundColor: 'var(--card-bg, var(--bg-color))' }}>
+            <div
+              style={{
+                borderRadius: '20px',
+                background: 'var(--card-gradient)',
+                border: '1px solid var(--card-border)',
+                boxShadow: 'var(--card-shadow)',
+                padding: '25px'
+              }}
+            >
               {success && (
-                <Alert variant="success" className="mb-4 border-0 shadow-sm">
-                  Message sent successfully! I will get back to you soon.
+                <Alert variant="success">
+                  Message sent successfully 🚀
                 </Alert>
               )}
-              
-              <Form onSubmit={handleSubmit} noValidate>
-                <Row>
+
+              <Form onSubmit={handleSubmit}>
+
+                <Row className="g-3">
+
                   <Col md={6}>
-                    <Form.Group className="mb-3" controlId="contactName">
-                      <Form.Label style={{ color: 'var(--text-color)' }}>Name</Form.Label>
-                      <Form.Control 
-                        type="text" 
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        isInvalid={!!errors.name}
-                        placeholder="John Doe"
-                        style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', borderColor: 'var(--bg-color)' }}
-                        className="p-3 border"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors.name}
-                      </Form.Control.Feedback>
-                    </Form.Group>
+                    <Form.Control
+                      name="name"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      isInvalid={!!errors.name}
+                      className="p-3"
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        color: 'var(--text-color)',
+                        borderRadius: '12px'
+                      }}
+                    />
                   </Col>
 
                   <Col md={6}>
-                    <Form.Group className="mb-3" controlId="contactEmail">
-                      <Form.Label style={{ color: 'var(--text-color)' }}>Email</Form.Label>
-                      <Form.Control 
-                        type="email" 
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        isInvalid={!!errors.email}
-                        placeholder="john@example.com"
-                        style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', borderColor: 'var(--bg-color)' }}
-                        className="p-3 border"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors.email}
-                      </Form.Control.Feedback>
-                    </Form.Group>
+                    <Form.Control
+                      name="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      isInvalid={!!errors.email}
+                      className="p-3"
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        color: 'var(--text-color)',
+                        borderRadius: '12px'
+                      }}
+                    />
                   </Col>
+
                 </Row>
 
-                <Form.Group className="mb-4" controlId="contactMessage">
-                  <Form.Label style={{ color: 'var(--text-color)' }}>Message</Form.Label>
-                  <Form.Control 
-                    as="textarea" 
-                    rows={5}
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    isInvalid={!!errors.message}
-                    placeholder="Your message here..."
-                    style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', borderColor: 'var(--bg-color)' }}
-                    className="p-3 border"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  name="message"
+                  placeholder="Your Message..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  isInvalid={!!errors.message}
+                  className="mt-3 p-3"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    color: 'var(--text-color)',
+                    borderRadius: '12px'
+                  }}
+                />
 
-                <Button 
-                  variant="primary" 
-                  type="submit" 
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
-                  className="w-100 py-3 fw-bold border-0"
-                  style={{ backgroundColor: 'var(--primary-color)' }}
+                  className="w-100 mt-4 py-3 fw-bold border-0"
+                  style={{
+                    borderRadius: '999px',
+                    background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))'
+                  }}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
+
               </Form>
             </div>
           </Col>
+
         </Row>
       </motion.div>
-    </>
+    </div>
   );
 };
 

@@ -21,7 +21,7 @@ export interface Experience {
 
 export interface Skill {
   id: string;
-  category: 'Frontend' | 'Backend' | 'Tools';
+  category: 'Frontend' | 'Backend' | 'Database' | 'Tools';
   name: string;
   icon?: string;
   proficiency?: number;
@@ -34,79 +34,97 @@ export interface Achievement {
   icon: string;
 }
 
-// Dummy Data
-
+// ================= PROJECTS =================
 export const projects: Project[] = [
   {
     id: 'p1',
-    title: 'E-Commerce Platform',
-    description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB. Features secure payments and an admin dashboard.',
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
-    githubLink: 'https://github.com/your-username/ecommerce',
-    liveDemo: 'https://ecommerce-demo.com',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
+    title: 'Hariss International – Scalable Laravel Backend',
+    description:
+      'Engineered a production-grade backend handling authentication, RBAC, and high-volume API requests.',
+    techStack: ['Laravel', 'PHP', 'MySQL', 'REST APIs', 'Sanctum', 'Spatie'],
+    githubLink: 'https://github.com/your-username/hariss-backend',
+    image: 'https://www.vecteezy.com/free-photos/technology',
   },
   {
     id: 'p2',
-    title: 'AI Chat Interface',
-    description: 'A modern chat interface communicating with an AI backend, featuring real-time typing indicators and markdown support.',
-    techStack: ['React', 'TypeScript', 'TailwindCSS', 'OpenAI API'],
-    githubLink: 'https://github.com/your-username/ai-chat',
-    liveDemo: 'https://ai-chat-demo.com',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80',
+    title: 'CookingStories – Full Stack Recipe Platform',
+    description:
+      'Developed a full-stack Django platform with dynamic filtering, CRUD operations, and responsive UI. Focused on performance, usability, and clean architecture.',
+    techStack: ['Django', 'Python', 'SQLite', 'Tailwind CSS'],
+    githubLink: 'https://github.com/your-username/cookingstories',
+    image: 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=900&q=80',
   },
   {
     id: 'p3',
-    title: 'Task Management App',
-    description: 'A responsive task tracking application with drag-and-drop functionality and user authentication.',
-    techStack: ['React', 'Redux', 'Firebase', 'Framer Motion'],
-    githubLink: 'https://github.com/your-username/task-app',
-    liveDemo: 'https://task-app-demo.com',
-    image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?w=800&q=80',
+    title: 'REST API System – Clean Architecture Backend',
+    description:
+      'Designed a scalable REST API system with centralized error handling, validation pipelines, and optimized PostgreSQL queries for performance-critical operations.',
+    techStack: ['Laravel', 'PostgreSQL', 'API Development', 'Postman'],
+    githubLink: 'https://github.com/your-username/api-system',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80',
   }
 ];
+// ================= EXPERIENCE =================
 
 export const experiences: Experience[] = [
   {
     id: '1',
-    role: "Frontend Developer Intern",
-    company: "Company Name",
-    duration: "Jan 2024 - Mar 2024",
-    description: "Worked on React UI, improved performance, and collaborated with the design team."
+    role: 'Software Developer',
+    company: 'TechnoBren Infotech Pvt. Ltd.',
+    duration: 'Mar 2025 - Present',
+    description:
+      'Developing scalable backend systems using Laravel, building REST APIs, implementing authentication & RBAC, and optimizing database performance for production-level applications.'
   },
   {
     id: '2',
-    role: 'Junior Frontend Developer',
-    company: 'Tech Solutions Inc.',
-    duration: 'Jan 2022 - Dec 2023',
-    description: 'Developing and maintaining responsive web applications using React.js and modern CSS frameworks.'
+    role: 'Software Developer Intern',
+    company: 'Digipodium',
+    duration: 'Jun 2024 - Sep 2024',
+    description:
+      'Built responsive UI and backend features using React and Python. Improved performance and user experience across multiple modules.'
   }
 ];
-
+// ================= SKILLS =================
 export const skills: Skill[] = [
-  { id: 's1', category: 'Frontend', name: 'React.js', proficiency: 90 },
-  { id: 's2', category: 'Frontend', name: 'TypeScript', proficiency: 85 },
-  { id: 's3', category: 'Backend', name: 'Node.js', proficiency: 75 },
-  { id: 's4', category: 'Tools', name: 'Git & GitHub', proficiency: 88 },
-];
+  // Backend
+  { id: 's1', category: 'Backend', name: 'Laravel', proficiency: 90 },
+  { id: 's2', category: 'Backend', name: 'Django', proficiency: 80 },
+  { id: 's3', category: 'Backend', name: 'REST APIs', proficiency: 90 },
+  { id: 's4', category: 'Backend', name: 'Authentication & RBAC', proficiency: 85 },
 
+  // Database
+  { id: 's5', category: 'Database', name: 'MySQL', proficiency: 85 },
+  { id: 's6', category: 'Database', name: 'PostgreSQL', proficiency: 80 },
+  { id: 's7', category: 'Database', name: 'Query Optimization', proficiency: 75 },
+
+  // Frontend
+  { id: 's8', category: 'Frontend', name: 'HTML', proficiency: 85 },
+  { id: 's9', category: 'Frontend', name: 'CSS', proficiency: 80 },
+  { id: 's10', category: 'Frontend', name: 'Tailwind CSS', proficiency: 85 },
+  { id: 's11', category: 'Frontend', name: 'Bootstrap', proficiency: 80 },
+
+  // Tools
+  { id: 's12', category: 'Tools', name: 'Postman', proficiency: 85 },
+  { id: 's13', category: 'Tools', name: 'Git & GitHub', proficiency: 80 },
+];
+// ================= ACHIEVEMENTS =================
 export const achievements: Achievement[] = [
   {
     id: 1,
-    title: "Top Performer",
-    description: "Ranked top 5% in coding contests",
-    icon: "🏆"
+    title: 'Backend Systems Development',
+    description: 'Built scalable APIs and backend systems using Laravel and Django for real-world applications.',
+    icon: '⚙️'
   },
   {
     id: 2,
-    title: "Projects Completed",
-    description: "Built 10+ full-stack apps",
-    icon: "🚀"
+    title: 'Industry Experience',
+    description: 'Working as a Software Developer delivering production-level backend solutions.',
+    icon: '💼'
   },
   {
     id: 3,
-    title: "Open Source",
-    description: "Contributed to GitHub projects",
-    icon: "💻"
+    title: 'Full Stack Applications',
+    description: 'Developed multiple full-stack applications with clean architecture and responsive UI.',
+    icon: '🚀'
   }
 ];
