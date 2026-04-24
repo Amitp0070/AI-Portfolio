@@ -1,4 +1,4 @@
-import { Modal, Button, Badge } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { BsGithub, BsBoxArrowUpRight } from 'react-icons/bs';
 import type { Project } from '../../data/portfolio';
 
@@ -12,71 +12,57 @@ const ProjectModal = ({ show, onHide, project }: ProjectModalProps) => {
   if (!project) return null;
 
   return (
-    <Modal 
-      show={show} 
-      onHide={onHide} 
-      size="lg" 
-      centered
-      contentClassName="border-0 shadow-lg"
-    >
-      <Modal.Header closeButton style={{ backgroundColor: 'var(--bg-color)', borderBottomColor: 'var(--section-bg)' }}>
-        <Modal.Title className="fw-bold" style={{ color: 'var(--primary-color)' }}>
-          {project.title}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="p-0" style={{ backgroundColor: 'var(--bg-color)' }}>
-        <img 
-          src={project.image} 
-          alt={project.title} 
-          className="w-100" 
-          style={{ maxHeight: '400px', objectFit: 'cover' }}
+    <Modal show={show} onHide={onHide} centered size="lg">
+      <Modal.Body className="project-modal">
+
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-100 project-modal-img"
         />
+
         <div className="p-4">
-          <div className="mb-4">
-            {project.techStack.map((tech, idx) => (
-              <Badge 
-                pill 
-                key={idx}
-                className="me-2 mb-2 fw-normal"
-                style={{ backgroundColor: 'var(--primary-color)', color: '#fff', padding: '0.4rem 0.8rem' }}
-              >
-                {tech}
-              </Badge>
-            ))}
-          </div>
-          <p style={{ color: 'var(--text-color)', fontSize: '1.1rem', lineHeight: '1.8' }}>
+
+          <h4 className="fw-bold mb-3">{project.title}</h4>
+
+          <p className="project-modal-desc">
             {project.description}
           </p>
+
+          {/* TECH */}
+          <div className="d-flex flex-wrap gap-2 mt-3">
+            {project.techStack.map((tech, i) => (
+              <span key={i} className="project-tag">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* ACTIONS */}
+          <div className="d-flex gap-3 mt-4">
+
+            {project.githubLink && (
+              <Button
+                variant="outline-light"
+                onClick={() => window.open(project.githubLink, '_blank')}
+              >
+                <BsGithub /> Code
+              </Button>
+            )}
+
+            {project.liveDemo && (
+              <Button
+                className="project-btn"
+                onClick={() => window.open(project.liveDemo, '_blank')}
+              >
+                <BsBoxArrowUpRight /> Live Demo
+              </Button>
+            )}
+
+          </div>
+
         </div>
       </Modal.Body>
-      <Modal.Footer style={{ backgroundColor: 'var(--bg-color)', borderTopColor: 'var(--section-bg)' }}>
-        <Button variant="outline-secondary" onClick={onHide}>
-          Close
-        </Button>
-        {project.githubLink && (
-          <Button 
-            variant="outline-secondary" 
-            href={project.githubLink}
-            target="_blank"
-            rel="noreferrer"
-            className="d-flex align-items-center gap-2"
-          >
-            <BsGithub /> View Code
-          </Button>
-        )}
-        {project.liveDemo && (
-          <Button 
-            variant="primary" 
-            href={project.liveDemo}
-            target="_blank"
-            rel="noreferrer"
-            className="d-flex align-items-center gap-2"
-            style={{ backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)' }}
-          >
-            <BsBoxArrowUpRight /> Live Demo
-          </Button>
-        )}
-      </Modal.Footer>
     </Modal>
   );
 };

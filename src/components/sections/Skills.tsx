@@ -1,36 +1,50 @@
-import { Row, Col, Card, Badge } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import { techIcons } from '../../utils/techIcons';
+import { FaServer } from 'react-icons/fa';
 
 const services = [
   {
-    title: 'Backend Systems',
-    icon: '⚙️',
+    title: 'Backend Engineering',
     description:
-      'Designing production-ready backend systems with clean architecture, secure authentication, and scalable APIs.',
-    highlights: ['REST APIs', 'RBAC', 'Auth Systems'],
-    tech: ['Laravel', 'Django']
+      'Designing scalable and secure backend systems with clean architecture, optimized APIs, and production-ready deployment strategies.',
+    highlights: [
+      'RESTful API Development',
+      'Authentication & RBAC',
+      'Clean MVC Architecture',
+      'Scalable System Design'
+    ],
+    tech: ['Laravel', 'Django', 'REST APIs', 'PHP']
   },
   {
-    title: 'Database Optimization',
-    icon: '🗄️',
+    title: 'Database Engineering',
     description:
-      'Optimizing database performance with indexing, query tuning, and efficient schema design.',
-    highlights: ['Query Speed', 'Indexing', 'Data Modeling'],
+      'Improving application performance through efficient database design, query optimization, and indexing strategies.',
+    highlights: [
+      'Query Optimization',
+      'Indexing & Performance',
+      'Schema Design',
+      'Data Handling'
+    ],
     tech: ['MySQL', 'PostgreSQL']
   },
   {
-    title: 'Full-Stack Development',
-    icon: '🌐',
+    title: 'Full Stack Development',
     description:
-      'Building complete applications with backend logic and clean, responsive frontend UI.',
-    highlights: ['Responsive UI', 'API Integration', 'Performance'],
-    tech: ['HTML', 'Tailwind', 'Bootstrap']
+      'Building complete web applications with seamless backend integration and modern, responsive frontend design.',
+    highlights: [
+      'Responsive UI',
+      'API Integration',
+      'Performance Optimization',
+      'Clean UI/UX'
+    ],
+    tech: ['HTML', 'CSS', 'Tailwind CSS', 'Bootstrap']
   }
 ];
-const Skills = () => {
 
+const Skills = () => {
   return (
-    <div style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+    <section style={{ paddingTop: '100px', paddingBottom: '100px' }}>
 
       {/* HEADER */}
       <div className="text-center mb-5">
@@ -38,15 +52,23 @@ const Skills = () => {
           WHAT I DO
         </p>
 
-        <h2 className="fw-bold mb-3">
+        <h2 className="fw-bold mb-3" style={{ fontSize: '2.5rem' }}>
           Building Systems That Scale 🚀
         </h2>
 
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-          I focus on backend architecture, database performance, and full-stack development to deliver reliable and scalable applications.
+        <p
+          style={{
+            color: 'var(--text-secondary)',
+            maxWidth: '650px',
+            margin: '0 auto'
+          }}
+        >
+          I specialize in backend architecture, database performance, and full-stack development —
+          delivering scalable, secure, and production-ready applications.
         </p>
       </div>
 
+      {/* CARDS */}
       <Row>
         {services.map((service, index) => (
           <Col lg={4} md={6} className="mb-4" key={index}>
@@ -56,18 +78,19 @@ const Skills = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15 }}
-              whileHover={{ y: 0 }}
               viewport={{ once: true }}
+              whileHover={{ y: -6 }}
             >
 
               <Card className="portfolio-card h-100 p-4 position-relative">
 
-                {/* TOP GLOW LINE */}
+                {/* TOP GRADIENT LINE */}
                 <div
                   style={{
                     height: '4px',
                     width: '100%',
-                    background: 'linear-gradient(90deg, var(--primary-color), var(--accent-color))',
+                    background:
+                      'linear-gradient(90deg, var(--primary-color), var(--accent-color))',
                     borderRadius: '20px 20px 0 0',
                     position: 'absolute',
                     top: 0,
@@ -75,25 +98,8 @@ const Skills = () => {
                   }}
                 />
 
-                {/* ICON */}
-                <div
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '14px',
-                    background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.6rem',
-                    marginBottom: '15px'
-                  }}
-                >
-                  {service.icon}
-                </div>
-
                 {/* TITLE */}
-                <h5 className="fw-bold mb-2" style={{ color: 'var(--text-color)' }}>
+                <h5 className="fw-bold mb-3" style={{ color: 'var(--text-color)' }}>
                   {service.title}
                 </h5>
 
@@ -103,27 +109,33 @@ const Skills = () => {
                 </p>
 
                 {/* HIGHLIGHTS */}
-                <ul style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                <ul
+                  style={{
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.85rem',
+                    paddingLeft: '18px'
+                  }}
+                >
                   {service.highlights.map((h, i) => (
-                    <li key={i}>✔ {h}</li>
+                    <li key={i} style={{ marginBottom: '6px' }}>
+                      ✔ {h}
+                    </li>
                   ))}
                 </ul>
 
-                {/* TECH */}
-                <div className="mt-auto">
+                {/* TECH ICONS */}
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '14px',
+                    marginTop: '20px',
+                    flexWrap: 'wrap'
+                  }}
+                >
                   {service.tech.map((tech, i) => (
-                    <Badge
-                      pill
-                      key={i}
-                      className="me-2 mb-2 fw-normal"
-                      style={{
-                        backgroundColor: 'var(--primary-color)',
-                        color: '#fff',
-                        padding: '0.4rem 0.8rem'
-                      }}
-                    >
-                      {tech}
-                    </Badge>
+                    <div key={i} title={tech} className="tech-icon-modern">
+                      {techIcons[tech] || <FaServer />}
+                    </div>
                   ))}
                 </div>
 
@@ -134,7 +146,8 @@ const Skills = () => {
           </Col>
         ))}
       </Row>
-    </div>
+
+    </section>
   );
 };
 

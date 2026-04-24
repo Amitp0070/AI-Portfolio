@@ -55,7 +55,7 @@ const Projects = () => {
       {/* PROJECT GRID */}
       <Row>
         {projects.map((project, index) => (
-          <Col lg={4} md={6} sm={12} className="mb-4" key={project.id}>
+          <Col lg={4} md={6} sm={12} className="mb-4 d-flex" key={project.id}>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -69,14 +69,14 @@ const Projects = () => {
               style={{ cursor: 'pointer' }}
             >
               <Card
-                className="h-100 border-0"
+                className="h-100 border-0 project-card"
                 style={{
                   borderRadius: '20px',
                   background: 'var(--card-gradient)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid var(--card-border)',
                   boxShadow: 'var(--card-shadow)',
-                  overflow: 'hidden',
+                  overflow: 'visible', // 🔥 IMPORTANT CHANGE
                   position: 'relative'
                 }}
               >
@@ -113,12 +113,13 @@ const Projects = () => {
                       fontSize: '0.75rem',
                       padding: '5px 12px',
                       borderRadius: '20px',
-                      background: 'rgba(108,99,255,0.15)',
-                      border: '1px solid rgba(108,99,255,0.3)',
+                      background: 'var(--tag-bg)',
+                      border: '1px solid var(--tag-border)',
+                      color: 'var(--tag-text)',
                       marginBottom: '10px'
                     }}
                   >
-                    Backend Project
+                    Full Stack Project
                   </div>
 
                   {/* TITLE */}
@@ -151,6 +152,18 @@ const Projects = () => {
                   </div>
 
                 </div>
+
+                {/* 🔥 CENTER ICON BUTTON */}
+                <div
+                  className="project-center-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleShowModal(project);
+                  }}
+                >
+                  📄
+                </div>
+
               </Card>
             </motion.div>
 

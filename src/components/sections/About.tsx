@@ -1,9 +1,26 @@
 import { Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import { techIcons } from '../../utils/techIcons';
+import { FaServer } from 'react-icons/fa';
 
 const techStack = [
-  'Laravel', 'Django', 'REST APIs', 'MySQL',
-  'PostgreSQL', 'RBAC', 'Postman', 'Tailwind'
+  'Laravel',
+  'Django',
+  'REST APIs',
+  'MySQL',
+  'PostgreSQL',
+  'RBAC',
+  'Postman',
+  'Tailwind CSS',
+  'PHP',
+  'Python',
+  'Git',
+  'GitHub',
+  'AWS',
+  'Docker',
+  'Nginx',
+  'Firebase',
+  'Vercel'
 ];
 
 const About = () => {
@@ -16,21 +33,9 @@ const About = () => {
           ABOUT ME
         </p>
 
-        <h2
-          className="fw-bold"
-          style={{
-            fontSize: '2.8rem',
-            lineHeight: '1.3'
-          }}
-        >
+        <h2 className="fw-bold" style={{ fontSize: '2.8rem' }}>
           Passionate About Building{' '}
-          <span
-            style={{
-              background: 'linear-gradient(90deg, var(--primary-color), var(--accent-color))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
-          >
+          <span className="gradient-text">
             Scalable Systems
           </span>
         </h2>
@@ -46,12 +51,7 @@ const About = () => {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            style={{
-              width: '260px',
-              borderRadius: '20px',
-              border: '3px solid var(--primary-color)',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.4)'
-            }}
+            className="about-image"
           />
         </Col>
 
@@ -67,88 +67,51 @@ const About = () => {
               Hi, I'm Amit 👋
             </h3>
 
-            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
-              I’m a backend developer focused on building reliable and scalable systems.
-              I work mainly with Laravel and Django, designing APIs and handling complex data.
+            <p className="about-text">
+              Backend-focused developer specializing in Laravel and Django.
+              I build scalable APIs, secure systems, and optimized database-driven applications.
             </p>
 
-            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
-              Currently working at TechnoBren Infotech, building production-level backend systems
-              with authentication and optimized database performance.
+            <p className="about-text">
+              Currently working at TechnoBren Infotech, delivering production-grade backend
+              systems with authentication, RBAC, and high-performance architecture.
             </p>
 
             {/* HIGHLIGHTS */}
-            <ul style={{ color: 'var(--text-secondary)', paddingLeft: '18px' }}>
-              <li>⚙️ Backend Developer (Laravel & Django)</li>
-              <li>🚀 API Design & System Architecture</li>
-              <li>🗄️ Database Optimization</li>
-              <li>🔐 Authentication & RBAC</li>
+            <ul className="about-list">
+              <li>Backend Systems (Laravel & Django)</li>
+              <li>API Architecture & System Design</li>
+              <li>Database Optimization</li>
+              <li>Authentication & RBAC</li>
             </ul>
 
-            {/* 🔥 TECH SCROLL (NOW CORRECT POSITION) */}
-            <div
-              style={{
-                marginTop: '20px',
-                overflow: 'hidden',
-                maxWidth: '100%'
-              }}
-            >
+            {/* 🔥 TECH ICON SCROLLER */}
+            <div className="tech-scroll-container">
+
               <motion.div
-                style={{
-                  display: 'flex',
-                  gap: '14px',
-                  width: 'max-content'
-                }}
-                animate={{
-                  x: ['0%', '-50%']
-                }}
+                className="tech-scroll"
+                animate={{ x: ['0%', '-50%'] }}
                 transition={{
                   repeat: Infinity,
                   duration: 18,
-                  ease: 'linear'
+                  ease: 'linear',
                 }}
               >
-                {[...techStack, ...techStack].map((tech, i) => {
-
-                  const getColor = (tech: string) => {
-                    switch (tech) {
-                      case 'Laravel': return '#ff2d20';
-                      case 'Django': return '#0c4b33';
-                      case 'MySQL': return '#00758f';
-                      case 'PostgreSQL': return '#336791';
-                      case 'REST APIs': return '#6c63ff';
-                      case 'RBAC': return '#9333ea';
-                      case 'Postman': return '#ff6c37';
-                      case 'Tailwind': return '#38bdf8';
-                      default: return '#6c63ff';
-                    }
-                  };
-
-                  return (
-                    <span
-                      key={i}
-                      style={{
-                        padding: '6px 14px',
-                        borderRadius: '20px',
-                        fontSize: '0.8rem',
-                        whiteSpace: 'nowrap',
-                        background: `${getColor(tech)}20`,
-                        color: getColor(tech),
-                        border: `1px solid ${getColor(tech)}40`
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  );
-                })}
+                {[...techStack, ...techStack].map((tech, i) => (
+                  <div key={i} className="tech-circle">
+                    <div className="tech-icon">
+                      {techIcons[tech] || <FaServer />}
+                    </div>
+                  </div>
+                ))}
               </motion.div>
+
             </div>
 
           </motion.div>
         </Col>
 
       </Row>
-
     </div>
   );
 };

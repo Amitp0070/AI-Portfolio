@@ -8,66 +8,145 @@ const Footer = () => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -70; 
+      const yOffset = -70;
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
   return (
-    <footer style={{ backgroundColor: 'var(--card-bg)', borderTop: '1px solid rgba(128,128,128,0.1)' }}>
+    <footer
+      style={{
+        background: 'var(--card-gradient)',
+        borderTop: '1px solid var(--card-border)',
+      }}
+    >
       <Container className="py-5">
         <Row className="gy-4">
+
+          {/* LEFT */}
           <Col lg={4} md={12}>
-            <h5 className="fw-bold mb-3" style={{ color: 'var(--text-color)' }}>AI Portfolio</h5>
-            <p style={{ color: 'var(--text-color)', opacity: 0.7 }}>
-              Frontend Developer creating intuitive and dynamic web experiences.
+            <h5
+              className="fw-bold mb-3"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Amit Pathak
+            </h5>
+
+            <p style={{ color: 'var(--text-secondary)' }}>
+              Full Stack Developer focused on building scalable backend systems
+              and modern web experiences.
             </p>
           </Col>
-          
+
+          {/* LINKS */}
           <Col lg={4} md={6}>
-            <h6 className="fw-bold mb-3" style={{ color: 'var(--text-color)' }}>Quick Links</h6>
+            <h6
+              className="fw-bold mb-3"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Quick Links
+            </h6>
+
             <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
-              <li>
-                <a href="#home" onClick={(e) => handleScroll(e, 'home')} className="footer-link text-decoration-none">Home</a>
-              </li>
-              <li>
-                <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="footer-link text-decoration-none">About</a>
-              </li>
-              <li>
-                <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} className="footer-link text-decoration-none">Projects</a>
-              </li>
-              <li>
-                <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="footer-link text-decoration-none">Contact</a>
-              </li>
+              {[
+                { id: 'home', label: 'Home' },
+                { id: 'about', label: 'About' },
+                { id: 'projects', label: 'Projects' },
+                { id: 'contact', label: 'Contact' },
+              ].map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={`#${link.id}`}
+                    onClick={(e) => handleScroll(e, link.id)}
+                    className="footer-link text-decoration-none"
+                    style={{
+                      color: 'var(--text-secondary)',
+                      transition: '0.3s',
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = 'var(--primary-color)')
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = 'var(--text-secondary)')
+                    }
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </Col>
-          
+
+          {/* SOCIAL */}
           <Col lg={4} md={6}>
-            <h6 className="fw-bold mb-3" style={{ color: 'var(--text-color)' }}>Connect</h6>
+            <h6
+              className="fw-bold mb-3"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Connect
+            </h6>
+
             <div className="d-flex gap-3">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="footer-icon">
-                <BsGithub size={22} />
+
+              {/* GitHub */}
+              <a
+                href="https://github.com/Amitp0070"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-icon"
+              >
+                <BsGithub size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-icon">
-                <BsLinkedin size={22} />
+
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/amit-pathak-558971277/"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-icon"
+              >
+                <BsLinkedin size={20} />
               </a>
-              <a href="mailto:hello@example.com" className="footer-icon">
-                <BsEnvelope size={22} />
+
+              {/* Email */}
+              <a
+                href="mailto:amitpathak8327@gmail.com"
+                className="footer-icon"
+              >
+                <BsEnvelope size={20} />
               </a>
+
             </div>
           </Col>
+
         </Row>
-        
-        <hr className="my-4" style={{ borderColor: 'var(--text-color)', opacity: 0.1 }} />
-        
+
+        {/* DIVIDER */}
+        <hr
+          className="my-4"
+          style={{
+            borderColor: 'var(--card-border)',
+          }}
+        />
+
+        {/* BOTTOM */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <p className="mb-2 mb-md-0 small" style={{ color: 'var(--text-color)', opacity: 0.7 }}>
-            &copy; {currentYear} John Doe. All rights reserved.
+
+          <p
+            className="mb-2 mb-md-0 small"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            &copy; {currentYear} Amit Pathak. All rights reserved.
           </p>
-          <p className="mb-0 small" style={{ color: 'var(--text-color)', opacity: 0.7 }}>
-            Built with React & Bootstrap
+
+          <p
+            className="mb-0 small"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Built with React ⚛️ & Bootstrap
           </p>
+
         </div>
       </Container>
     </footer>

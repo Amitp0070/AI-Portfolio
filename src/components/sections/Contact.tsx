@@ -2,13 +2,24 @@ import { useState } from 'react';
 import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { BsGithub, BsLinkedin, BsEnvelope } from 'react-icons/bs';
 import { motion } from 'framer-motion';
-
+import emailjs from '@emailjs/browser';
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  // ✅ VALIDATION
   const validate = () => {
     let isValid = true;
     const newErrors = { name: '', email: '', message: '' };
@@ -33,21 +44,41 @@ const Contact = () => {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ SUBMIT (REAL EMAIL)
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    // console.log("FORM SUBMIT TRIGGERED");
     e.preventDefault();
     setSuccess(false);
 
-    if (validate()) {
-      setIsSubmitting(true);
+    if (!validate()) return;
 
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSuccess(true);
-        setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
 
-        setTimeout(() => setSuccess(false), 4000);
-      }, 1200);
+    try {
+      await emailjs.send(
+        'service_6qp9huu',       // 🔥 your service id
+        'template_1jlpyui',     // 🔥 replace with your template id
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        '1tknnDPJh8rkPn4fV'     // ✅ your public key
+      );
+
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+
+      setTimeout(() => setSuccess(false), 4000);
+
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      alert('Error sending message');
     }
+
+    setIsSubmitting(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -106,9 +137,20 @@ const Contact = () => {
               <div className="d-flex flex-column gap-3 mt-4">
 
                 {[
-                  { icon: <BsEnvelope />, text: 'hello@example.com' },
-                  { icon: <BsGithub />, text: 'GitHub Profile' },
-                  { icon: <BsLinkedin />, text: 'LinkedIn Profile' }
+                  {
+                    icon: <BsEnvelope />,
+                    text: 'amitpathak8327@gmail.com'
+                  },
+                  {
+                    icon: <BsGithub />,
+                    text: 'GitHub Profile',
+                    link: 'https://github.com/Amitp0070'
+                  },
+                  {
+                    icon: <BsLinkedin />,
+                    text: 'LinkedIn Profile',
+                    link: 'https://www.linkedin.com/in/amit-pathak-558971277/'
+                  }
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -116,6 +158,10 @@ const Contact = () => {
                     style={{
                       padding: '12px',
                       borderRadius: '12px',
+                      cursor: item.link ? 'pointer' : 'default'
+                    }}
+                    onClick={() => {
+                      if (item.link) window.open(item.link, '_blank', 'noopener,noreferrer');
                     }}
                   >
                     <div
@@ -172,12 +218,6 @@ const Contact = () => {
                       onChange={handleChange}
                       isInvalid={!!errors.name}
                       className="p-3"
-                      style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        color: 'var(--text-color)',
-                        borderRadius: '12px'
-                      }}
                     />
                   </Col>
 
@@ -189,12 +229,6 @@ const Contact = () => {
                       onChange={handleChange}
                       isInvalid={!!errors.email}
                       className="p-3"
-                      style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        color: 'var(--text-color)',
-                        borderRadius: '12px'
-                      }}
                     />
                   </Col>
 
@@ -209,12 +243,6 @@ const Contact = () => {
                   onChange={handleChange}
                   isInvalid={!!errors.message}
                   className="mt-3 p-3"
-                  style={{
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    color: 'var(--text-color)',
-                    borderRadius: '12px'
-                  }}
                 />
 
                 <Button
