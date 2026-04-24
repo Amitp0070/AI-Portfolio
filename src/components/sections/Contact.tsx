@@ -248,7 +248,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-100 mt-4 py-3 fw-bold border-0"
+                  className="w-100 mt-4 py-3 fw-bold border-0 contact-btn"
                   style={{
                     borderRadius: '999px',
                     background: 'linear-gradient(135deg, var(--primary-color), var(--accent-color))'

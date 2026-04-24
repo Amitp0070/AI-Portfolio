@@ -596,3 +596,20 @@ body::before {
 .project-center-btn:hover {
   transform: translateX(-50%) scale(1.1);
 }
+
+.contact-btn {
+  transition: none !important;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color)) !important;
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.contact-btn:focus,
+.contact-btn:active {
+  box-shadow: none !important;
+  outline: none !important;
+}
